@@ -358,4 +358,22 @@ public class ClientTest {
         assertEquals("testung", info.get("index_name"));
 
     }
+
+    @Test
+    public void testHighlightSummarize() throws Exception {
+        Client cl = new Client("testung", "localhost", 6379);
+        Schema sc = new Schema().addTextField("text", 1.0);
+        cl._conn().flushDB();
+        cl.createIndex(sc, Client.IndexOptions.Default());
+
+        Map<String, Object> doc = new HashMap<>();
+        doc.put("text", "Redis is often referred as a data structures server. What this means is that Redis provides access to mutable data structures via a set of commands, which are sent using a server-client model with TCP sockets and a simple protocol. So different processes can query and modify the same data structures in a shared way");
+        // Add a document
+        cl.addDocument("foo", 1.0, doc);
+        Query q = new Query("data").highlightFields().summarizeFields();
+        SearchResult res = cl.search(q);
+
+        assertEquals("is often referred as a <b>data</b> structures server. What this means is that Redis provides... What this means is that Redis provides access to mutable <b>data</b> structures via a set of commands, which are sent using a... So different processes can query and modify the same <b>data</b> structures in a shared... ",
+                res.docs.get(0).get("text"));
+    }
 }
