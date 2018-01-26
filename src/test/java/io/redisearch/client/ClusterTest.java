@@ -18,8 +18,6 @@ import static junit.framework.TestCase.*;
  * Created by dvirsky on 09/02/17.
  */
 public class ClusterTest {
-
-
     @Test
     public void search() throws Exception {
         ClusterClient cl = new ClusterClient("testung", "localhost", 7000);

@@ -1,6 +1,38 @@
 # JRediSearch
 
-A Java Client Library for [RediSearch](https://redisearch.io)
+Redis with full-text search support, thanks to Java and [RediSearch](https://redisearch.io).
+
+## This is a Fork
+Yes. It's true. We were not dedicated enough to try to write our own implementation of this library, so we forked the
+original. Everything outside of this blurb is from the original repository, pretty much word-for-word. 
+Now, why did we fork it, that is, apart from our sheer laziness? Well, we weren't the biggest fans of how this repository
+was maintained. All of the JAR dependencies were kept local, so you couldn't even pull the latest version from Maven. 
+What's up with that? Also, there was no way to get this library apart from building it yourself and adding it to you app.
+This way, we can at least publish releases to the GitHub Releases tab. So, we went ahead and replace the POM-based dependency
+management this app used with [Facebook Buck](https://buckbuild.com). Now, we can more effectively manage this library's
+dependencies. The only JAR remaining in this app is the Jedis v3.0 JAR, seeing there was no way to download it from the 
+Jedis repo, and the Maven version is grossly outdated. So this may be the only copy in existence. Who knows?
+
+As for testing, don't ask. You can run Buck tests, but it relies on a local server running on two different ports and 
+there were no instructions in the original repo so just... don't. Don't ask. Maybe you can help us rewrite it. 
+
+Anyway, to build:
+
+```bash
+$ ./build.sh
+```
+
+or:
+
+```bash
+$ buck build it --out <custom_output_path>
+```
+
+and to test (not that you'd want to):
+
+```bash
+$ buck test it
+```
 
 ## Overview 
 

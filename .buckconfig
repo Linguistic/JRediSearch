@@ -1,0 +1,8 @@
+[alias]
+    it = //:redisearch-1.0
+
+[download]
+    in_build = true
+
+[maven_repositories]
+    central = https://repo1.maven.org/maven2

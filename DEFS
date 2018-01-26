@@ -1,0 +1,13 @@
+def remote_jar(name, url, hash, deps = []):
+    remote_file(
+        name = name + "-source",
+        out = name + "-source.jar",
+        url = url,
+        sha1 = hash
+    )
+    prebuilt_jar(
+        name = name,
+        binary_jar = ":" + name + "-source",
+        deps=deps,
+        visibility=["PUBLIC"]
+    )
