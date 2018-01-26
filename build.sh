@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-buck build it --out jredisearch-1.0.jar
+mkdir -p bin
+buck build it --out bin/jredisearch-1.0.jar
